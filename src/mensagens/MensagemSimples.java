@@ -1,14 +1,31 @@
 package mensagens; // Define o pacote onde esta classe está localizada.
 
-public class MensagemSimples implements Mensagem { // Classe que implementa a interface Mensagem para representar uma mensagem básica.
-    private String texto; // Variável que armazena o conteúdo da mensagem.
+/**
+ * Classe que representa uma mensagem básica, sem alterações.
+ */
+public class MensagemSimples implements Mensagem { // Implementa a interface Mensagem.
 
-    public MensagemSimples(String texto) { // Construtor que recebe um texto e inicializa a variável.
-        this.texto = texto; // Define o conteúdo da mensagem.
+    private final String texto; // Armazena o conteúdo da mensagem.
+
+    /**
+     * Construtor da classe que recebe o texto da mensagem.
+     *
+     * @param texto Conteúdo da mensagem.
+     */
+    public MensagemSimples(String texto) {
+        if (texto == null || texto.trim().isEmpty()) {
+            throw new IllegalArgumentException("O conteúdo da mensagem não pode ser vazio ou nulo.");
+        }
+        this.texto = texto; // Atribui o conteúdo à variável.
     }
 
+    /**
+     * Retorna o conteúdo da mensagem.
+     *
+     * @return Texto original.
+     */
     @Override
-    public String getConteudo() { // Implementação do método da interface Mensagem.
-        return texto; // Retorna o conteúdo da mensagem.
+    public String getConteudo() {
+        return texto;
     }
 }

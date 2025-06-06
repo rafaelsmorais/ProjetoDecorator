@@ -1,15 +1,36 @@
-package mensagens; // Define o pacote onde esta classe está localizada.
+package mensagens; // Declara o pacote onde esta classe está localizada.
 
-public class MensagemAssinadaDecorator extends MensagemDecorator { // Classe que estende MensagemDecorator para adicionar uma assinatura à mensagem.
-    private String assinatura; // Armazena a assinatura que será adicionada à mensagem.
+/**
+ * Decorador que adiciona uma assinatura ao final da mensagem.
+ */
+public class MensagemAssinadaDecorator extends MensagemDecorator {
 
-    public MensagemAssinadaDecorator(Mensagem mensagem, String assinatura) { // Construtor que recebe uma mensagem e uma assinatura.
-        super(mensagem); // Chama o construtor da classe base (MensagemDecorator).
-        this.assinatura = assinatura; // Define a assinatura que será usada na mensagem.
+    private final String assinatura; // Armazena o nome da assinatura.
+
+    /**
+     * Construtor que recebe a mensagem original e a assinatura.
+     *
+     * @param mensagem   Objeto Mensagem a ser decorado.
+     * @param assinatura Nome ou frase de assinatura.
+     */
+    public MensagemAssinadaDecorator(Mensagem mensagem, String assinatura) {
+        super(mensagem); // Inicializa a superclasse com a mensagem original.
+
+        if (assinatura == null || assinatura.trim().isEmpty()) {
+            throw new IllegalArgumentException("Assinatura não pode ser vazia ou nula.");
+        }
+
+        this.assinatura = assinatura; // Atribui a assinatura à variável.
     }
 
+    /**
+     * Retorna o conteúdo original da mensagem com a assinatura adicionada.
+     *
+     * @return Texto decorado com assinatura.
+     */
     @Override
-    public String getConteudo() { // Sobrescreve o método getConteudo() para adicionar a assinatura à mensagem.
-        return super.getConteudo() + "\n\nAtenciosamente,\n" + assinatura; // Retorna o conteúdo original da mensagem com a assinatura adicionada.
+    public String getConteudo() {
+        return super.getConteudo() + "\n\nAtenciosamente,\n" + assinatura;
+        // Junta o conteúdo original com uma saudação e a assinatura.
     }
 }
